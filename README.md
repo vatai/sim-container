@@ -5,7 +5,11 @@
 Get the `riken.docker` file and run the following command:
 
 ```
-HOST $ docker build -t riken/simulator .
+docker build \
+    --build-arg USER=$(whoami) \
+    --build-arg USER_ID=$(id -u) \
+    --build-arg GROUP_ID=$(id -g) \
+    -t riken/simulator .
 ```
 
 Note the dot `.` at the end!  This creates the docker image

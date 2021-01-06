@@ -31,12 +31,12 @@ RUN chmod o+w /etc/sudoers \
   && chmod o-w /etc/sudoers
 
 USER ${USER}
+WORKDIR ${HOME}
+RUN git clone --depth 1 https://github.com/RIKEN-RCCS/riken_simulator.git
+RUN sed -i -e 's!PREFIX=/opt/riken_simulator!PREFIX=/home/user/riken_simulator!' riken_simulator/util/gem5-o3
+RUN echo TADAM > file.txt
 
-RUN cd ${HOME} \
- && git clone --depth 1 https://github.com/RIKEN-RCCS/riken_simulator.git \
- && sed -i -e 's!PREFIX=/opt/riken_simulator!PREFIX=/home/user/riken_simulator!' riken_simulator/util/gem5-o3
-
-RUN cd ${HOME}/riken_simulator \
- && sed -i "369,372s:^:#:" SConstruct \
- && scons build/ARM/gem5.opt -j $(nproc)
+WORKDIR ${HOME}/riken_simulator
+RUN sed -i "369,372s:^:#:" SConstruct
+RUN scons build/ARM/gem5.opt -j $(nproc)
 

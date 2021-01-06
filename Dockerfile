@@ -34,10 +34,8 @@ RUN chmod o+w /etc/sudoers
 RUN sed -i -e 's/%sudo\tALL=(ALL:ALL) ALL/%sudo\tALL=(ALL) NOPASSWD: ALL/'  /etc/sudoers
 RUN chmod o-w /etc/sudoers
 
-RUN pwd && whoami
 USER ${USER}
 WORKDIR ${HOME}
-RUN pwd && whoami
 RUN git clone --depth 1 https://github.com/RIKEN-RCCS/riken_simulator.git
 RUN sed -i -e 's!PREFIX=/opt/riken_simulator!PREFIX=/home/user/riken_simulator!' riken_simulator/util/gem5-o3
 

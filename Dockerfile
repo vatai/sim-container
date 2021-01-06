@@ -1,13 +1,17 @@
 FROM ubuntu:18.04
 MAINTAINER vatai
 
-ENV USER user
+ARG USER
+ARG USER_ID
+ARG GROUP_ID
+
 ENV HOME /home/${USER}
 ENV SHELL /bin/bash
 
-RUN useradd -m ${USER}
+RUN groupadd -g ${GROUP_ID} ${USER}
+RUN useradd -l -u ${USER_ID} -g ${USER} ${USER}
 RUN gpasswd -a ${USER} sudo
-RUN echo 'user:userpass' | chpasswd
+RUN echo "${USER}:userpass" | chpasswd
 
 RUN apt-get update && apt-get install -y \
     g++ \
@@ -26,9 +30,9 @@ RUN apt-get update && apt-get install -y \
 
 RUN apt-get clean
 
-RUN chmod o+w /etc/sudoers \
-  && sed -i -e 's/%sudo\tALL=(ALL:ALL) ALL/%sudo\tALL=(ALL) NOPASSWD: ALL/'  /etc/sudoers \
-  && chmod o-w /etc/sudoers
+RUN chmod o+w /etc/sudoers
+RUN sed -i -e 's/%sudo\tALL=(ALL:ALL) ALL/%sudo\tALL=(ALL) NOPASSWD: ALL/'  /etc/sudoers
+RUN chmod o-w /etc/sudoers
 
 USER ${USER}
 WORKDIR ${HOME}

@@ -5,7 +5,7 @@
 Get the `riken.docker` file and run the following command:
 
 ```
-HOST $ docker build -f riken.dockerfile -t riken/simulator .
+HOST $ docker build -t riken/simulator .
 ```
 
 Note the dot `.` at the end!  This creates the docker image

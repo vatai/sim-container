@@ -35,10 +35,10 @@ HOST $ docker cp <container_name>:/abs/path/tosomefile.txt .
 
 Each container (i.e. running instance of the image) has a name.  These
 name can be listed using the `docker container ls -a` command (which
-include both running and inactive containers).  
+include both running and inactive containers).
 
 Docker usually generates silly names for containers, such as:
-`stupefied_johnson`.  
+`stupefied_johnson`.
 
 To clean up, you
 should run `docker container prune` once in a while.

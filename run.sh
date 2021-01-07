@@ -2,11 +2,13 @@
 
 SRCDIR=${HOME}/code
 OUTDIR=${HOME}/m5out
+HOST_OUTDIR=$(pwd)/tmp
 CONTAINER=simulator
 
+mkdir ${HOST_OUTDIR}
 docker run --rm --name=${CONTAINER} \
        -v ${HOME}/code/NEDO/util/polybench-c-3.2:${SRCDIR} \
-       -v $(pwd):${OUTDIR} \
+       -v ${HOST_OUTDIR}:${OUTDIR} \
        riken/simulator \
        aarch64-linux-gnu-gcc-8 -static -O3 \
        -I${SRCDIR}/utilities/ -I${SRCDIR}/stencils/jacobi-1d-imper/ \

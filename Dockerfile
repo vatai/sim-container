@@ -10,7 +10,7 @@ ENV HOME /home/${USER}
 ENV SHELL /bin/bash
 
 RUN groupadd -g ${GROUP_ID} ${GROUP}
-RUN useradd -l -m -u ${USER_ID} -g ${USER} ${USER}
+RUN useradd -l -m -u ${USER_ID} -g ${GROUP} ${USER}
 RUN gpasswd -a ${USER} sudo
 RUN echo "${USER}:userpass" | chpasswd
 

@@ -74,3 +74,11 @@ aarch64-linux-gnu-gcc-8 -static -O3 \
     -DLARGE_DATASET \
     -o jacobi-1d-imper
 ```
+
+```
+time ${HOME}/riken_simulator/build/ARM/gem5.opt \
+   ${HOME}/riken_simulator/configs/example/se.py \
+   --cpu-type=O3_ARM_PostK_3 --caches \
+   --l2cache --l2_size=1024MB \
+   -c jacobi-1d-imper
+``

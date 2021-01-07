@@ -6,6 +6,8 @@ HOST_OUTDIR=$(pwd)/tmp
 CONTAINER=simulator
 
 mkdir ${HOST_OUTDIR}
+chmod o+rX ${HOST_OUTDIR}
+
 docker run --rm --name=${CONTAINER} \
        -v ${HOME}/code/NEDO/util/polybench-c-3.2:${SRCDIR} \
        -v ${HOST_OUTDIR}:${OUTDIR} \

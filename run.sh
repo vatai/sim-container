@@ -16,7 +16,7 @@ docker run --rm --name=${CONTAINER} \
        aarch64-linux-gnu-gcc-8 -static -O3 \
        -I${SRCDIR}/utilities/ -I${SRCDIR}/stencils/jacobi-1d-imper/ \
        ${SRCDIR}/utilities/polybench.c ${SRCDIR}/stencils/jacobi-1d-imper/jacobi-1d-imper.c \
-       -DLARGE_DATASET \
+       -DMINI_DATASET \
        -o ${OUTDIR}/jacobi-1d-imper
 
 # create exe in ${HOST_OUTDIR}

@@ -5,7 +5,7 @@ OUTDIR=${HOME}/m5out
 HOST_OUTDIR=$(pwd)/tmp
 CONTAINER=simulator
 
-mkdir ${HOST_OUTDIR}
+mkdir -pf ${HOST_OUTDIR}
 chmod o+rX ${HOST_OUTDIR}
 
 docker run --rm --name=${CONTAINER} \

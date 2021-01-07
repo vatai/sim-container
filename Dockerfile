@@ -2,13 +2,14 @@ FROM ubuntu:18.04
 MAINTAINER vatai
 
 ARG USER
+ARG GROUP
 ARG USER_ID
 ARG GROUP_ID
 
 ENV HOME /home/${USER}
 ENV SHELL /bin/bash
 
-RUN groupadd -g ${GROUP_ID} ${USER}
+RUN groupadd -g ${GROUP_ID} ${GROUP}
 RUN useradd -l -m -u ${USER_ID} -g ${USER} ${USER}
 RUN gpasswd -a ${USER} sudo
 RUN echo "${USER}:userpass" | chpasswd

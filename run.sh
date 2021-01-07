@@ -3,9 +3,12 @@
 SIMDIR=${HOME}/riken_simulator
 SRCDIR=${HOME}/code
 OUTDIR=${HOME}/m5out
+HOST_BINDIR=$(pwd)/bin
 HOST_OUTDIR=$(pwd)/tmp
 CONTAINER=simulator
 
+mkdir -p ${HOST_BINDIR}
+chmod o+rX ${HOST_BINDIR}
 mkdir -p ${HOST_OUTDIR}
 chmod o+rX ${HOST_OUTDIR}
 

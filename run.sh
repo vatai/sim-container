@@ -6,7 +6,7 @@ CONTAINER=simulator
 
 docker run --rm --name=${CONTAINER} \
        -v ${HOME}/code/NEDO/util/polybench-c-3.2:${SRCDIR} \
-       -v $(PWD):${OUTDIR} \
+       -v $(pwd):${OUTDIR} \
        riken/simulator \
        aarch64-linux-gnu-gcc-8 -static -O3 \
        -I${SRCDIR}/utilities/ -I${SRCDIR}/stencils/jacobi-1d-imper/ \

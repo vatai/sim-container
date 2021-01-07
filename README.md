@@ -65,3 +65,12 @@ cp -r /hostdir/dot_prod ~/
 make -C ~/dot_prod
 ~/riken_simulator/util/gem5-o3 -c ~/dot_prod/main
 ```
+
+## Temporary note about compilation
+```
+aarch64-linux-gnu-gcc-8 -static -O3 \
+    -I./utilities/ -Istencils/jacobi-1d-imper/ \
+    utilities/polybench.c stencils/jacobi-1d-imper/jacobi-1d-imper.c \
+    -DLARGE_DATASET \
+    -o jacobi-1d-imper
+```

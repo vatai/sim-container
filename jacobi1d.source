@@ -1,3 +1,5 @@
+#!/bin/bash
+
 HOST_SRCDIR=${HOME}/code/NEDO/util/polybench-c-3.2
 BIN=jacobi-1d-imper
 COMPILE_CMD="${CC} -I${SRCDIR}/utilities/ -I${SRCDIR}/stencils/jacobi-1d-imper/ \

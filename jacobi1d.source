@@ -1,9 +1,11 @@
 #!/bin/bash
 
+DATASET=${DATASET:-MINI_DATASET}
+
 HOST_SRCDIR=${HOME}/code/NEDO/util/polybench-c-3.2
 BIN=jacobi-1d-imper
 COMPILE_CMD="${CC} -I${SRCDIR}/utilities/ -I${SRCDIR}/stencils/jacobi-1d-imper/ \
        ${SRCDIR}/utilities/polybench.c ${SRCDIR}/stencils/jacobi-1d-imper/jacobi-1d-imper.c \
-       -DMINI_DATASET \
+       -D${DATASET} \
        -o ${BINDIR}/${BIN}"
 

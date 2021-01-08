@@ -10,10 +10,10 @@ CXX="aarch64-linux-gnu-g++-8 -static -O3"
 HOST_SRCDIR=${HOME}/code/NEDO/util/polybench-c-3.2
 BIN=jacobi-1d-imper
 HOST_BINDIR=$(pwd)/bin
-COMPILE_CMD= ${CC} -I${SRCDIR}/utilities/ -I${SRCDIR}/stencils/jacobi-1d-imper/ \
+COMPILE_CMD="${CC} -I${SRCDIR}/utilities/ -I${SRCDIR}/stencils/jacobi-1d-imper/ \
        ${SRCDIR}/utilities/polybench.c ${SRCDIR}/stencils/jacobi-1d-imper/jacobi-1d-imper.c \
        -DMINI_DATASET \
-       -o ${BINDIR}/${BIN}
+       -o ${BINDIR}/${BIN}"
 
 mkdir -p ${HOST_BINDIR}
 chmod o+rX ${HOST_BINDIR}

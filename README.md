@@ -1,5 +1,8 @@
 ## Riken simulator with `docker`
 
+### !!!THIS NEEDS A TOTAL REWRITE!!!
+Look at the code! It should be quite simple.
+
 ### Build image
 
 Get the `riken.docker` file and run the following command:

@@ -9,3 +9,5 @@ COMPILE_CMD="${CC} -I${SRCDIR}/utilities/ -I${SRCDIR}/stencils/jacobi-1d-imper/ 
        -D${DATASET} \
        -o ${BINDIR}/${BIN}"
 
+OUTPUT_PREFIX=${BIN}-dataset_${DATASET}
+

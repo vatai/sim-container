@@ -2,6 +2,9 @@
 
 source env.source
 
+mkdir -p ${HOST_OUTDIR}
+chmod o+rX ${HOST_OUTDIR}
+
 docker run --rm \
        -v ${HOST_BINDIR}:${BINDIR} \
        -v ${HOST_OUTDIR}:${OUTDIR} \

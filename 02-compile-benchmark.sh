@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source env.sh
+source env.source
 
 docker run --rm \
        -v ${HOST_SRCDIR}:${SRCDIR} \

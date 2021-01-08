@@ -1,9 +1,3 @@
-CACHE_SIZE=${CACHE_SIZE:"1024MB"}
-
-HOST_OUTDIR=$(pwd)/${CACHE_SIZE}l2size
-mkdir -p ${HOST_OUTDIR}
-chmod o+rX ${HOST_OUTDIR}
-
 HOST_SRCDIR=${HOME}/code/NEDO/util/polybench-c-3.2
 BIN=jacobi-1d-imper
 COMPILE_CMD="${CC} -I${SRCDIR}/utilities/ -I${SRCDIR}/stencils/jacobi-1d-imper/ \

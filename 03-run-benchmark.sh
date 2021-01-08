@@ -1,8 +1,6 @@
 #!/bin/bash
 
-
 source env.source
-
 
 docker run --rm \
        -v ${HOST_BINDIR}:${BINDIR} \

@@ -1,0 +1,5 @@
+CACHE_SIZE=${CACHE_SIZE:"1024MB"}
+
+HOST_OUTDIR=$(pwd)/${CACHE_SIZE}l2size
+mkdir -p ${HOST_OUTDIR}
+chmod o+rX ${HOST_OUTDIR}

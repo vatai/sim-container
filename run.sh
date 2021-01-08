@@ -4,8 +4,8 @@ SIMDIR=${HOME}/riken_simulator
 OUTDIR=${HOME}/m5out
 SRCDIR=/tmp/src
 BINDIR=/tmp/bin
-CC=aarch64-linux-gnu-gcc-8 -static -O3
-CXX=aarch64-linux-gnu-g++-8 -static -O3
+CC="aarch64-linux-gnu-gcc-8 -static -O3"
+CXX="aarch64-linux-gnu-g++-8 -static -O3"
 
 HOST_SRCDIR=${HOME}/code/NEDO/util/polybench-c-3.2
 BIN=jacobi-1d-imper

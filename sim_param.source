@@ -1,11 +1,13 @@
 #!/bin/bash
 
-CACHE_SIZE=${CACHE_SIZE:-1024MB}
+CACHE_SIZE=${CACHE_SIZE:-8MB}
+CACHELINE=${CACHELINE:-256}
 
-HOST_OUTDIR=$(pwd)/${CACHE_SIZE}l2size
+HOST_OUTDIR=$(pwd)/${CACHE_SIZE}l2size-${CACHELINE}cacheline
 mkdir -p ${HOST_OUTDIR}
 chmod o+rX ${HOST_OUTDIR}
 
 SIM_PARAMS="--cpu-type=O3_ARM_PostK_3 --caches \
        --l2cache \
-       --l2_size=${CACHE_SIZE}"
+       --l2_size=${CACHE_SIZE} \
+       --cacheline_size=${CACHELINE}"

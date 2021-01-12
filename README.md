@@ -20,3 +20,6 @@ simulator parameters.
 CAUTION: Don't forget to set `COMPILE_PARAMS` if you want to use a
 different benchmark.
 
+## Known bugs
+If you get some permission error mentioning `mkdir` then loosen your
+permissions around of the host source dir.

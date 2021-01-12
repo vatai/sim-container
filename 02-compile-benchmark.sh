@@ -4,7 +4,7 @@
 source env.source
 
 mkdir -p ${HOST_BINDIR}
-chmod o+rX ${HOST_BINDIR}
+chmod -R o+rX ${HOST_BINDIR}
 docker run --rm \
        -v ${HOST_SRCDIR}:${SRCDIR} \
        -v ${HOST_BINDIR}:${BINDIR} \

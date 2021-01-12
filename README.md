@@ -22,7 +22,8 @@ different benchmark.
 
 ## Known bugs
 If you get some permission error mentioning `mkdir` then loosen your
-permissions around of the host source dir.
+permissions (probably `chmod o+rx` on the parent directory it
+complains about).
 
 You need to get your own polybench and set `HOST_SRCDIR` in
 `jacobi1d.source`.

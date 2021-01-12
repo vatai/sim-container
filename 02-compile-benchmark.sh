@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# See env.source to select which benchmark to compile/run.
 source env.source
 
 mkdir -p ${HOST_BINDIR}

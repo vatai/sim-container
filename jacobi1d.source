@@ -1,13 +1,27 @@
 #!/bin/bash
 
+# `DATASET` is a `jacobi1d` benchmark specific, compile-time
+# parameter.
 DATASET=${DATASET:-MINI_DATASET}
 
-HOST_SRCDIR=${HOME}/code/NEDO/util/polybench-c-3.2
+# `BIN` is the name of the binare, both generated on the host file
+# system and later used in the simulator.
 BIN=jacobi-1d-imper
+
+# `OUTPUT_PREFIX` is the first half of the name of the output
+# directory.  This output direcotry is where the `stats.txt` file of a
+# simulator run is saved. (The second half of the output directory
+# name should contain the simulator parameters).
+OUTPUT_PREFIX=${BIN}-dataset_${DATASET}
+
+# `HOST_SRCDIR` is the directory on the host bound to the `SRCDIR` in
+# the docker image.
+HOST_SRCDIR=${HOME}/code/NEDO/util/polybench-c-3.2
+
+# `COMPILE_CMD` should generate a(n ARM) binary with name `BIN` to the
+# `BINDIR` directory, from `SRCDIR` using `CC` or `CXX` compilers.
 COMPILE_CMD="${CC} -I${SRCDIR}/utilities/ -I${SRCDIR}/stencils/jacobi-1d-imper/ \
        ${SRCDIR}/utilities/polybench.c ${SRCDIR}/stencils/jacobi-1d-imper/jacobi-1d-imper.c \
        -D${DATASET} \
        -o ${BINDIR}/${BIN}"
-
-OUTPUT_PREFIX=${BIN}-dataset_${DATASET}
 

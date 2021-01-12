@@ -3,7 +3,7 @@
 # See env.source to select which benchmark to compile/run.
 source env.source
 
-umask 755; mkdir -m755 -p ${HOST_BINDIR}
+umask 022; mkdir -m755 -p ${HOST_BINDIR}
 
 docker run --rm \
        -v ${HOST_SRCDIR}:${SRCDIR} \

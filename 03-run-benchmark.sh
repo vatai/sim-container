@@ -3,7 +3,7 @@
 # See env.source to select which benchmark to compile/run.
 source env.source
 
-mkdir -p -m744 ${HOST_OUTDIR}
+env umask=755 mkdir -p ${HOST_OUTDIR}
 
 docker run --rm \
        -v ${HOST_BINDIR}:${BINDIR} \

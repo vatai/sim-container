@@ -14,15 +14,16 @@ polybench.
 ### Compiling a benchmark
 The `02-compile-benchmark.sh` builds a benchmark. See
 `jacobi1d.source` about modifying compilation parameters.  See
-`env.source` how to switch between benchmarks using `COMPILE_PARAMS`.
+`env.source` how to switch between benchmarks using `BENCH`
+environment variable.
 
 ### Running a benchmark
 The `03-run-benchmark` runs the simulator.  See `sim.source` (and of
 course the simulator itself) for details on how to specify different
 simulator parameters.
 
-CAUTION: Don't forget to set `COMPILE_PARAMS` if you want to use a
-different benchmark.
+CAUTION: Don't forget to set `BENCH` if you want to use a different
+benchmark.
 
 ## Known bugs
 If you get some permission error mentioning `mkdir` then loosen your

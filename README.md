@@ -7,6 +7,10 @@ verified with the `docker images` command).  Unless this image is
 deleted (using the `docker rmi riken/simulator:latest`), this script
 does not need to be invoked afterwards.
 
+### Getting polybench
+For convenience the `00-get-polybench.sh` can be used to download
+polybench.
+
 ### Compiling a benchmark
 The `02-compile-benchmark.sh` builds a benchmark. See
 `jacobi1d.source` about modifying compilation parameters.  See
@@ -24,6 +28,3 @@ different benchmark.
 If you get some permission error mentioning `mkdir` then loosen your
 permissions (probably `chmod o+rx` on the parent directory it
 complains about).
-
-You need to get your own polybench and set `HOST_SRCDIR` in
-`jacobi1d.source`.

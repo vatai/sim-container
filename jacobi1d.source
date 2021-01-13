@@ -16,7 +16,7 @@ OUTPUT_PREFIX=${BIN}-dataset_${DATASET}
 
 # `HOST_SRCDIR` is the directory on the host bound to the `SRCDIR` in
 # the docker image.
-HOST_SRCDIR=${HOME}/code/NEDO/util/polybench-c-3.2
+HOST_SRCDIR=$(pwd)/polybench-c-3.2
 
 # `COMPILE_CMD` should generate a(n ARM) binary with name `BIN` to the
 # `BINDIR` directory, from `SRCDIR` using `CC` or `CXX` compilers.

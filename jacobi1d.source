@@ -6,7 +6,7 @@ DATASET=${DATASET:-MINI_DATASET}
 
 # `BIN` is the name of the binare, both generated on the host file
 # system and later used in the simulator.
-BIN=jacobi-1d-imper
+BIN=jacobi-1d-imper-${DATASET}
 
 # `OUTPUT_PREFIX` is the first half of the name of the output
 # directory.  This output direcotry is where the `stats.txt` file of a

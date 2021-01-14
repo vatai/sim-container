@@ -29,3 +29,13 @@ benchmark.
 If you get some permission error mentioning `mkdir` then loosen your
 permissions (probably `chmod o+rx` on the parent directory it
 complains about).
+
+## Running the container
+Check out what are the variables in `env.source`.
+```
+docker run --rm -it \
+       -v ${HOST_SRCDIR}:${SRCDIR} \
+       -v ${HOST_BINDIR}:${BINDIR} \
+       riken/simulator \
+       /bin/bash
+```

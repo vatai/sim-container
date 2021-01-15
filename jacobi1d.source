@@ -4,9 +4,12 @@
 # parameter.
 DATASET=${DATASET:-MINI_DATASET}
 
+# Name of the benchmark
+NAME="jacobi-1d"
+
 # `BIN` is the name of the binare, both generated on the host file
 # system and later used in the simulator.
-BIN=jacobi-1d-imper-${DATASET}
+BIN=${NAME}-${DATASET}
 
 # `OUTPUT_PREFIX` is the first half of the name of the output
 # directory.  This output direcotry is where the `stats.txt` file of a
@@ -20,8 +23,8 @@ HOST_SRCDIR=$(pwd)/polybench-c-4.2.1-beta
 
 # `COMPILE_CMD` should generate a(n ARM) binary with name `BIN` to the
 # `BINDIR` directory, from `SRCDIR` using `CC` or `CXX` compilers.
-COMPILE_CMD="${CC} -I${SRCDIR}/utilities/ -I${SRCDIR}/stencils/jacobi-1d-imper/ \
-       ${SRCDIR}/utilities/polybench.c ${SRCDIR}/stencils/jacobi-1d-imper/jacobi-1d-imper.c \
+COMPILE_CMD="${CC} -I${SRCDIR}/utilities/ -I${SRCDIR}/stencils/${NAME}/ \
+       ${SRCDIR}/utilities/polybench.c ${SRCDIR}/stencils/${NAME}/${NAME}.c \
        -D${DATASET} \
        -o ${BINDIR}/${BIN}"
 

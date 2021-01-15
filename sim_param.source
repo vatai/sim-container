@@ -6,7 +6,7 @@ CACHELINE=${CACHELINE:-256}
 
 # Run specific parameters should be appended to the `HOST_OUTDIR`
 # name, not to overwrite results from previous runs.
-HOST_OUTDIR="$(pwd)/m5out/${OUTPUT_PREFIX}/${CACHE_SIZE}l2size-${CACHELINE}cacheline"
+HOST_OUTDIR="$(pwd)/m5out/${BIN}/${CACHE_SIZE}l2size-${CACHELINE}cacheline"
 
 # `DEFAULT_PARAMS` are from the A64FX (Riken) simulator scripts and
 # docs.

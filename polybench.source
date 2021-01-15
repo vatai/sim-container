@@ -12,14 +12,9 @@ POLYBENCH=${POLYBENCH:-stencils/jacobi-1d}
 NAME="$(basename ${POLYBENCH})"
 
 # `BIN` is the name of the binare, both generated on the host file
-# system and later used in the simulator.
+# system and later used in the simulator.  Make sure you add all the
+# compile time options!!!
 BIN=${NAME}-${DATASET}
-
-# `OUTPUT_PREFIX` is the first half of the name of the output
-# directory.  This output direcotry is where the `stats.txt` file of a
-# simulator run is saved. (The second half of the output directory
-# name should contain the simulator parameters).
-OUTPUT_PREFIX=${BIN}-dataset_${DATASET}
 
 # `HOST_SRCDIR` is the directory on the host bound to the `SRCDIR` in
 # the docker image.

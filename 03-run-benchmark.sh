@@ -11,4 +11,4 @@ docker run --rm \
        riken/simulator \
        ${SIMDIR}/build/ARM/gem5.opt \
        ${SIMDIR}/configs/example/se.py \
-       ${SIM_PARAMS} -c ${BINDIR}/${BIN}
+       ${SIM_PARAMS} -c ${BINDIR}/${BIN} >> ${HOST_OUTDIR}/output.txt

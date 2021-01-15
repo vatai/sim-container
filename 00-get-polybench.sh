@@ -1,10 +1,14 @@
 #!/bin/bash
 
-if [ ! -f ./polybench-c-3.2.tar.gz ]; then
+POLYBENCH_DIR=polybench-c-4.2.1-beta
+POLYBENCH_ARCHIVE=${POLYBENCH_DIR}.tar.gz
+URL_PREFIX=https://downloads.sourceforge.net/project/polybench/
+
+if [ ! -f ${POLYBENCH_ARCHIVE} ]; then
     # wget http://web.cse.ohio-state.edu/\~pouchet.2/software/polybench/download/polybench-c-3.2.tar.gz
-    wget https://downloads.sourceforge.net/project/polybench/polybench-c-4.2.1-beta.tar.gz
+    wget ${URL_PREFIX}${POLYBENCH_ARCHIVE}
 fi
-if [ ! -d ./polybench-c-3.2 ]; then
+if [ ! -d ${POLYBENCH_DIR} ]; then
 	# tar xzf polybench-c-3.2.tar.gz
-	tar xzf polybench-c-4.2.1-beta.tar.gz
+	tar xzf ${POLYBENCH_ARCHIVE}
 fi

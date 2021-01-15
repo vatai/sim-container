@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# exit when any command fails
+set -e
+
 CC=${CC:-"fcc -Nclang -O3"}
 
 echo "["

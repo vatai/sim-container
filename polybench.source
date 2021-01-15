@@ -1,0 +1,35 @@
+#!/bin/bash
+# Recipe/source file for any polybench benchmark.
+
+# `DATASET` is a `jacobi1d` benchmark specific, compile-time
+# parameter.
+DATASET=${DATASET:-MEDIUM_DATASET}
+
+# Polybench benchmark (directory inside the source dir)
+POLYBENCH=${POLYBENCH:-stencils/jacobi-1d}
+
+# Name of the benchmark
+NAME="$(basename ${POLYBENCH})"
+
+# `BIN` is the name of the binare, both generated on the host file
+# system and later used in the simulator.
+BIN=${NAME}-${DATASET}
+
+# `OUTPUT_PREFIX` is the first half of the name of the output
+# directory.  This output direcotry is where the `stats.txt` file of a
+# simulator run is saved. (The second half of the output directory
+# name should contain the simulator parameters).
+OUTPUT_PREFIX=${BIN}-dataset_${DATASET}
+
+# `HOST_SRCDIR` is the directory on the host bound to the `SRCDIR` in
+# the docker image.
+HOST_SRCDIR=${HOST_SRCDIR:-"./polybench-c-4.2.1-beta"}
+
+POLYBENCH_TIME=${POLYBENCH_TIME:-"-DPOLYBENCH_TIME"}
+
+# `COMPILE_CMD` should generate a(n ARM) binary with name `BIN` to the
+# `BINDIR` directory, from `SRCDIR` using `CC` or `CXX` compilers.
+COMPILE_CMD="${CC} -I${SRCDIR}/utilities/ -I${SRCDIR}/${POLYBENCH}/ \
+       ${SRCDIR}/utilities/polybench.c ${SRCDIR}/${POLYBENCH}/${NAME}.c \
+       -D${DATASET} ${POLYBENCH_TIME} -lm \
+       -o ${BINDIR}/${BIN}"

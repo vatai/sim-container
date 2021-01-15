@@ -1,2 +1,3 @@
 #!/bin/bash
-./utils/measure-all.sh > all_times.txt
+
+./utils/measure-all.sh > all_times.json

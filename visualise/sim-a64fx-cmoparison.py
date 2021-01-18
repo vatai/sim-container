@@ -8,9 +8,6 @@ import pandas
 
 def get_cpu_times(path):
     times = json.load(open(path))
-    # @todo(vatai): Do this in output generation and remove this
-    # conversion.
-    times = dict([tuple(*t.items()) for t in times])
     return times
 
 
@@ -27,6 +24,12 @@ def stats_to_dict(path):
     return result
 
 
+def output_to_time(path):
+    with open(path) as file:
+        lines = file.readlines()
+        return float(lines[-2])
+
+
 def get_sim_times(path):
     result = dict()
     for dir_path in path.glob("*"):
@@ -35,16 +38,23 @@ def get_sim_times(path):
             stats_path = base / "stats.txt"
             if stats_path.exists():
                 result[key] = stats_to_dict(stats_path)
+            output_path = base / "output.txt"
+            if stats_path.exists():
+                result[key]["output_time"] = output_to_time(output_path)
     return result
 
 
 def main():
     cpu_path = Path("../all_times.json")
-    sim_path = Path(os.path.expanduser("~/allm5"))
+    sim_path = Path(os.path.expanduser("../m5out"))
+
     cpu_times = get_cpu_times(cpu_path)
+    cpu_times = pandas.DataFrame(cpu_times).transpose()
+
     sim_times = get_sim_times(sim_path)
-    # print(list(cpu_times.keys()))
-    print(list(sim_times.values()))
+    sim_times = pandas.DataFrame(sim_times).transpose()
+
+    key = "bin/heat-3d-MEDIUM_DATASET"
 
 
 # if __name__ == "__main__":

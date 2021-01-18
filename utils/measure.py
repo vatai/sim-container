@@ -25,7 +25,7 @@ def main():
     run_times = get_run_times(executable, num_repeat)
 
     stats = f'{{"mean": {run_times.mean():10f}, "var": {run_times.var():7}}}'
-    print(f'{{"{executable}": \n  {stats}}},')
+    print(f'"{executable}": \n  {stats},')
 
     with open(f"{executable}.runtimes.txt", "w") as file:
         file.write(str(run_times))

@@ -73,6 +73,10 @@ def main():
     times = times[["output_time", "minimum"]]
     times = times.rename(columns={"output_time": "sim_time", "minimum": "a64fx"})
     times.plot.bar()
+
+    plot_name = "sim-vs-a64fx"
+    plt.savefig(f"{plot_name}.png", bbox_inches="tight")
+    plt.savefig(f"{plot_name}.pdf", bbox_inches="tight")
     plt.show()
 
 

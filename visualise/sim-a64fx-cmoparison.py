@@ -70,8 +70,8 @@ def main():
     # time_mean_var.plot.box()
     # times.loc[["output_time"], :].plot()
     times = times.transpose()
-    times = times[["output_time", "mean"]]
-    times = times.rename(columns={"output_time": "sim_time", "mean": "a64fx"})
+    times = times[["output_time", "minimum"]]
+    times = times.rename(columns={"output_time": "sim_time", "minimum": "a64fx"})
     times.plot.bar()
     plt.show()
 

@@ -1,10 +1,15 @@
 #!/bin/env python
 
+import concurrent.futures
 import itertools
-from concurrent.futures import ProcessPoolExecutor
+import os
+import subprocess
 from pathlib import Path
 
 import yaml
+
+COMPILE_CMD = "./02-compile-benchmark.sh"
+SIM_CMD = "./03-run-benchmark.sh"
 
 
 def make_pair(a, b):
@@ -40,15 +45,26 @@ def expand_configs_dict(configs_dict):
 
     prod = itertools.product(*sim_params, bench, *bench_params)
     # return list(map(" ".join, prod))
-    return map(dict, prod)
+
+    # WARNING: do not remove the list conversion, because it will
+    # return an iterator, which "disappears" after one use.
+    return list(map(dict, prod))
+
+
+def launch_on_all_cores(cmd, configs):
+    with concurrent.futures.ProcessPoolExecutor() as ex:
+        run = subprocess.run
+        home = {"HOME": os.path.expanduser("~")}
+        futures = {ex.submit(run, cmd, env={**c, **home}): c for c in configs}
+        for future in concurrent.futures.as_completed(futures):
+            print(future.result())
 
 
 def main(path):
     configs_dict = yaml.load(open(path), Loader=yaml.SafeLoader)
     configs = expand_configs_dict(configs_dict)
-    print(list(configs))
-    # with ProcessPoolExecutor() as executor:
-    #     print(executor._max_workers)
+    launch_on_all_cores(COMPILE_CMD, configs)
+    launch_on_all_cores(SIM_CMD, configs)
 
 
 main("./polybench-test.yaml")

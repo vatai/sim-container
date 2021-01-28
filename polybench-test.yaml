@@ -1,0 +1,9 @@
+bench: "polybench.source"
+sim_params:
+  cache_size:
+    - "8MB"
+    - "16MB"
+  cacheline: "256"
+bench_params:
+  dataset: "MINI_DATASET"
+  polybench: "polybench_list.txt"

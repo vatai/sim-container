@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# `BIN` is the name of the binare, both generated on the host file
+# system and later used in the simulator.  Make sure you add all the
+# compile time options!!!
+BIN=${NAME}-${DATASET}
+
+GITCOMMIT="4772cf0194e2ae6d6752c5cacb8cf063fbfef7d0"
+
+# `HOST_SRCDIR` is the directory on the host bound to the `SRCDIR` in
+# the docker image.
+HOST_SRCDIR=${HOST_SRCDIR:-"$(pwd)/XSBench"}
+
+# `COMPILE_CMD` should generate a(n ARM) binary with name `BIN` to the
+# `BINDIR` directory, from `SRCDIR` using `CC` or `CXX` compilers.
+COMPILE_CMD=""

@@ -1,5 +1,6 @@
 #!/bin/env python
 
+import argparse
 import concurrent.futures
 import itertools
 import os
@@ -60,11 +61,39 @@ def launch_on_all_cores(cmd, configs):
             print(future.result())
 
 
-def main(path):
-    configs_dict = yaml.load(open(path), Loader=yaml.SafeLoader)
+def main(args):
+    configs_dict = yaml.load(open(args.path), Loader=yaml.SafeLoader)
     configs = expand_configs_dict(configs_dict)
-    launch_on_all_cores(COMPILE_CMD, configs)
-    launch_on_all_cores(SIM_CMD, configs)
+    if args.compile:
+        launch_on_all_cores(COMPILE_CMD, configs)
+    if args.runsim:
+        launch_on_all_cores(SIM_CMD, configs)
 
 
-main("./polybench-test.yaml")
+def get_args():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "path",
+        type=str,
+        help="Path to the yaml file",
+    )
+    parser.add_argument(
+        "--compile",
+        type=bool,
+        default=True,
+        action=argparse.BooleanOptionalAction,
+        help="Flag to enable/disable the compilation",
+    )
+    parser.add_argument(
+        "--runsim",
+        type=bool,
+        default=True,
+        action=argparse.BooleanOptionalAction,
+        help="Flag to enable/disable the simulation",
+    )
+    return parser.parse_args()
+
+
+if __name__ == "__main__":
+    args = get_args()
+    main(args)

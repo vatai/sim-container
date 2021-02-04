@@ -13,4 +13,4 @@ HOST_SRCDIR=${HOST_SRCDIR:-"$(pwd)/XSBench"}
 
 # `COMPILE_CMD` should generate a(n ARM) binary with name `BIN` to the
 # `BINDIR` directory, from `SRCDIR` using `CC` or `CXX` compilers.
-COMPILE_CMD=""
+COMPILE_CMD="./XSBench.sh"

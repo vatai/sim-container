@@ -12,3 +12,6 @@ HOST_SRCDIR=${HOST_SRCDIR:-"$(pwd)/benchmarks"}
 # `COMPILE_CMD` should generate a(n ARM) binary with name `BIN` to the
 # `BINDIR` directory, from `SRCDIR` using `CC` or `CXX` compilers.
 COMPILE_CMD="bash ${SRCDIR}/XSBench.sh"
+
+# Options to pass on to the simulator.
+OPTIONS="-o \"-t OMPNT -s small -l 1500 -G unionized\""

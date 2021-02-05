@@ -5,6 +5,15 @@
 # compile time options!!!
 BIN="XSBench"
 
+# Options to pass on to the simulator.
+XSBENCH_OMPNT=${XSBENCH_OMPNT:-12}
+XSBENCH_DATASET=${XSBENCH_DATASET:-small}
+XSBENCH_LOOKUP=${XSBENCH_LOOKUP:-1500}
+XSBENCH_ALGO=${XSBENCH_ALGO:-unionized}
+
+OPTIONS="-t ${XSBENCH_OMPNT} -s ${XSBENCH_DATASET} -l ${XSBENCH_LOOKUP} -G ${XSBENCH_ALGO}"
+DIRNAME_OPTIONS="/t${XSBENCH_OMPNT}-s${XSBENCH_DATASET}-l${XSBENCH_LOOKUP}-G{XSBENCH_ALGO}"
+
 # `HOST_SRCDIR` is the directory on the host bound to the `SRCDIR` in
 # the docker image.
 HOST_SRCDIR=${HOST_SRCDIR:-"$(pwd)/benchmarks"}
@@ -13,5 +22,3 @@ HOST_SRCDIR=${HOST_SRCDIR:-"$(pwd)/benchmarks"}
 # `BINDIR` directory, from `SRCDIR` using `CC` or `CXX` compilers.
 COMPILE_CMD="bash ${SRCDIR}/XSBench.sh"
 
-# Options to pass on to the simulator.
-OPTIONS="-t 12 -s small -l 1500 -G unionized"

@@ -14,4 +14,4 @@ HOST_SRCDIR=${HOST_SRCDIR:-"$(pwd)/benchmarks"}
 COMPILE_CMD="bash ${SRCDIR}/XSBench.sh"
 
 # Options to pass on to the simulator.
-OPTIONS="-t OMPNT -s small -l 1500 -G unionized"
+OPTIONS="-t 12 -s small -l 1500 -G unionized"

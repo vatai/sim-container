@@ -1,0 +1,3 @@
+[submodule "benchmarks/XSBench"]
+	path = benchmarks/XSBench
+	url = https://github.com/ANL-CESAR/XSBench.git

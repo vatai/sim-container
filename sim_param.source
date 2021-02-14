@@ -8,12 +8,8 @@ CACHELINE=${CACHELINE:-256}
 # name, not to overwrite results from previous runs.
 HOST_OUTDIR="$(pwd)/m5out/${BIN}/${CACHE_SIZE}l2size-${CACHELINE}cacheline${DIRNAME_OPTIONS}"
 
-# `DEFAULT_PARAMS` are from the A64FX (Riken) simulator scripts and
-# docs.
-DEFAULT_PARAMS="--cpu-type=O3_ARM_PostK_3 --caches --l2cache"
-
-# Run specific parameters should be added to `SIM_PARAMS` to be
-# executed when the simulator is invoked.
-SIM_PARAMS="${DEFAULT_PARAMS} \
-       --l2_size=${CACHE_SIZE} \
-       --cacheline_size=${CACHELINE}"
+SIM_PARAMS="--cpu-type=O3_ARM_PostK_3 \
+            --caches \
+            --l2cache \
+            --l2_size=${CACHE_SIZE} \
+            --cacheline_size=${CACHELINE}"

@@ -4,8 +4,8 @@ import argparse
 import concurrent.futures
 import itertools
 import os
-import subprocess
 from pathlib import Path
+from subprocess import run
 
 import yaml
 
@@ -54,7 +54,6 @@ def expand_configs_dict(configs_dict):
 
 def launch_on_all_cores(cmd, configs):
     with concurrent.futures.ProcessPoolExecutor() as ex:
-        run = subprocess.run
         home = {"HOME": os.path.expanduser("~")}
         futures = {ex.submit(run, cmd, env={**c, **home}): c for c in configs}
         for future in concurrent.futures.as_completed(futures):

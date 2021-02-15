@@ -15,5 +15,5 @@ docker run --rm \
        ${SIMDIR}/build/ARM/gem5.opt \
        ${SIMDIR}/configs/example/se.py \
        ${SIM_PARAMS} \
-       -c ${BINDIR}/${BIN} -o "${OPTIONS}" \
+       -c ${BINDIR}/${BIN} -o "${RUN_OPTIONS}" \
        >> ${HOST_OUTDIR}/output.txt

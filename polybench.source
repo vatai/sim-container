@@ -1,17 +1,14 @@
 #!/bin/bash
 
-# Defines $BIN, $HOST_SRCDIR, $COMPILE_CMD
 
-# Inputs
+# Inputs: CC, CXX, SRCDIR, HOST_SRCDIR
+# Outputs: BIN, HOST_SRCDIR, COMPILE_CMD, BIN_OPTIONS
+
+# Benchmark specific
 POLYBENCH_DATASET=${POLYBENCH_DATASET:-MEDIUM_DATASET}
 POLYBENCH_BENCHMARK=${POLYBENCH_BENCHMARK:-stencils/jacobi-1d}
 POLYBENCH_TIME=${POLYBENCH_TIME:-"-DPOLYBENCH_TIME"}
 
-# Constants
-CC="aarch64-linux-gnu-gcc-8 -static -O3"
-CXX="aarch64-linux-gnu-g++-8 -static -O3"
-
-# Output
 BIN=$(basename ${POLYBENCH_BENCHMARK})-${POLYBENCH_DATASET}
 HOST_SRCDIR=${HOST_SRCDIR:-"$(pwd)/polybench-c-4.2.1-beta"}
 COMPILE_CMD="${CC} -I${SRCDIR}/utilities/ \

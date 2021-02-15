@@ -18,5 +18,4 @@ COMPILE_CMD="${CC} -I${SRCDIR}/utilities/ \
                    ${SRCDIR}/${POLYBENCH_BENCHMARK}/${POLYBENCH_NAME}.c \
                    -D${POLYBENCH_DATASET} \
                    ${POLYBENCH_TIME} \
-                   -lm \
-                   -o ${BINDIR}/${BIN}"
+                   -lm -o ${BINDIR}/${BIN}"

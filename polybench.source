@@ -10,6 +10,15 @@ POLYBENCH_BENCHMARK=${POLYBENCH_BENCHMARK:-stencils/jacobi-1d}
 POLYBENCH_TIME=${POLYBENCH_TIME:-"-DPOLYBENCH_TIME"}
 
 POLYBENCH_NAME="$(basename ${POLYBENCH_BENCHMARK})"
-BIN="${POLYBENCH_NAME-${POLYBENCH_DATASET}"
+BIN="${POLYBENCH_NAME}-${POLYBENCH_DATASET}"
 HOST_SRCDIR=${HOST_SRCDIR:-"$(pwd)/polybench-c-4.2.1-beta"}
-COMPILE_CMD="${CC} -I${SRCDIR}/utilities/ -I${SRCDIR}/${POLYBENCH_BENCHMARK}/ ${SRCDIR}/utilities/polybench.c ${SRCDIR}/${POLYBENCH_BENCHMARK}/${POLYBENCH_NAME}.c -D${POLYBENCH_DATASET} ${POLYBENCH_TIME} -lm -o ${BINDIR}/${BIN}"
+COMPILE_CMD="${CC} \
+                   -I${SRCDIR}/utilities/ \
+                   -I${SRCDIR}/${POLYBENCH_BENCHMARK}/ \
+                   ${SRCDIR}/utilities/polybench.c \
+                   ${SRCDIR}/${POLYBENCH_BENCHMARK}/${POLYBENCH_NAME}.c \
+                   -D${POLYBENCH_DATASET} \
+                   ${POLYBENCH_TIME} \
+                   -lm \
+                   -o ${BINDIR}/${BIN}"
+

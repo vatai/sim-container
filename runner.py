@@ -24,32 +24,65 @@ def make_list(k, v):
             with open(v) as f:
                 lines = f.readlines()
             lines = filter(lambda t: t[0] != "#", lines)
-            return [make_pair(k, i.strip()) for i in lines]
+            return [(k, i.strip()) for i in lines]
         else:
-            return [make_pair(k, v)]
+            return [(k, v)]
     elif isinstance(v, list):
-        return [make_pair(k, i) for i in v]
+        return [(k, i) for i in v]
     else:
         raise ValueError
 
 
+def fun2(t):
+    return [make_list(k, v) for k, v in t]
+
+
+def fun1(t):
+    return list(itertools.product(*fun2(t)))
+
+
+def get_sim_params(d):
+    tmp = sum([fun1(t.items()) for t in d], [])
+    for t in tmp:
+        # print("-", list(map(lambda t: make_pair(*t), t)))
+        print("-", t)
+    return tmp
+
+
+def fun4(k, v):
+    tmp = get_sim_params(v)
+    return list(map(lambda t: (("BENCHMARK", k), *t), tmp))
+
+
+def fun3(t):
+    return sum([fun4(k, v) for k, v in t.items()], [])
+
+
 def expand_configs_dict(configs_dict):
-    bench = [make_pair("bench", configs_dict.pop("bench"))]
-
-    sim_dict = configs_dict.pop("sim_params").items()
-    sim_params = [make_list(k, v) for k, v in sim_dict]
-
-    bench_dict = configs_dict.pop("bench_params").items()
-    bench_params = [make_list(k, v) for k, v in bench_dict]
+    benchmark_dict = configs_dict.pop("benchmark")
+    benchmark_params = [
+        {"BENCHMARK": "polybench.source"},
+        {"BENCHMARK": "xsbench.source", "dataset": "mini"},
+        {"BENCHMARK": "xsbench.source", "dataset": "small"},
+    ]
+    sim_dict = configs_dict.pop("sim_params")
+    sim_params = [
+        {"CACHELINE": "128", "CACHE_SIZE": "8MB"},
+        {"CACHELINE": "128", "CACHE_SIZE": "1MB"},
+    ]
+    get_sim_params(sim_dict)
+    tmp = sum([fun3(t) for t in benchmark_dict], [])
+    for t in tmp:
+        print("*", t)
 
     assert configs_dict == {}, "Incorrect yaml file"
 
-    prod = itertools.product(*sim_params, bench, *bench_params)
+    prod = itertools.product(benchmark_params, sim_params)
     # return list(map(" ".join, prod))
 
     # WARNING: do not remove the list conversion, because it will
     # return an iterator, which "disappears" after one use.
-    return list(map(dict, prod))
+    return list(map(lambda t: t[0] | t[1], prod))
 
 
 def launch_on_all_cores(cmd, configs):

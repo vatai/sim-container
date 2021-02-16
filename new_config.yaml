@@ -1,23 +1,21 @@
-benchmarks:
-  - polybench:
+benchmark:
+  - polybench.source:
       -
-        compile:
-            name: "polybench_list.txt"
-            dataset: "MINI_DATASET"
+        POLYBENCH_NAME: "polybench_list.txt"
+        POLYBENCH_DATASET: "MINI_DATASET"
       -
-        compile:
-            name: "polybench_list.txt"
-            dataset: "SMALL_DATASET"
-  - sxbench:
+        POLYBENCH_NAME: "polybench_list.txt"
+        POLYBENCH_DATASET: "SMALL_DATASET"
+  - xsbench.source:
       -
-        dataset: "small"
-        lookup: "1500"
+        XSBENCH_DATASET: "small"
+        XSBENCH_LOOKUP: "1500"
 sim_params:
   -
-    cache_size:
+    CACHE_SIZE:
         - "8MB"
         - "16MB"
-    cacheline: "256"
+    CACHELINE: "256"
   -
-    cache_size: "16MB"
-    cacheline: "256"
+    CACHE_SIZE: "1MB"
+    CACHELINE: "128"

@@ -1,13 +1,7 @@
 benchmark:
   - polybench.source:
       POLYBENCH_NAME: "utils/generated_all_of_polybench.txt"
-      POLYBENCH_DATASET: "MINI_DATASET"
+      POLYBENCH_DATASET: "SMALL_DATASET"
 sim_params:
   - config1:
-      CACHE_SIZE:
-        - "8MB"
-        - "16MB"
-      CACHELINE: "256"
-  - config2:
-      CACHE_SIZE: "1MB"
-      CACHELINE: "128"
+      dummy: dummy

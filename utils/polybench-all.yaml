@@ -3,5 +3,8 @@ benchmark:
       POLYBENCH_NAME: "utils/generated_all_of_polybench.txt"
       POLYBENCH_DATASET: "SMALL_DATASET"
 sim_params:
-  - config1:
+  - gem5:
+      DOCKER_IMAGE: gem5
+      GEM5_CONFIG: configs/example/arm/se.py
+  - riken_simulator:
       dummy: dummy

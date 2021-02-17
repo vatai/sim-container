@@ -11,9 +11,9 @@ docker run --rm \
        --env BIN=${BIN} \
        -v ${HOST_BINDIR}:${BINDIR} \
        -v ${HOST_OUTDIR}:${OUTDIR} \
-       riken/simulator \
+        ${DOCKER_IMAGE} \
        ${SIMDIR}/build/ARM/gem5.opt \
-       ${SIMDIR}/configs/example/se.py \
+       ${SIMDIR}/${GEM5_CONFIG} \
        ${SIM_PARAMS} \
        -c ${BINDIR}/${BIN} -o "${RUN_OPTIONS}" \
        >> ${HOST_OUTDIR}/output.txt

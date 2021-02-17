@@ -15,5 +15,3 @@ for DIR in $(find ${SRCDIR} -type d); do
     fi
 done
 # fi
-
-

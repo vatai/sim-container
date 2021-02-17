@@ -11,5 +11,5 @@ docker run --rm \
        --env BIN=${BIN} \
        -v ${HOST_SRCDIR}:${SRCDIR} \
        -v ${HOST_BINDIR}:${BINDIR} \
-       riken/simulator \
+       ${DOCKER_IMAGE} \
        ${COMPILE_CMD}

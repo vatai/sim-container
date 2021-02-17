@@ -40,21 +40,18 @@ def get_params(d, k=None):
     return itertools.chain.from_iterable([to_keyvalue_pairs(d, k, b) for b, d in tmp])
 
 
-def expand_configs_dict(configs_dict):
-    sim_dict = configs_dict.pop("sim_params")
-    sim_params = get_params(sim_dict)
-
-    benchmark_dict = configs_dict.pop("benchmark")
-    benchmark_params = get_params(benchmark_dict, "BENCHMARK")
+def get_list_of_configs_from_yaml(path):
+    configs_dict = yaml.load(open(path), Loader=yaml.SafeLoader)
+    sim_params = get_params(configs_dict.pop("sim_params"))
+    benchmark_params = get_params(configs_dict.pop("benchmark"), "BENCHMARK")
 
     assert configs_dict == {}, "Incorrect yaml file"
 
     prod = itertools.product(benchmark_params, sim_params)
-    # return list(map(" ".join, prod))
 
     # WARNING: do not remove the list conversion, because it will
     # return an iterator, which "disappears" after one use.
-    return list(map(lambda t: t[0] + t[1], prod))
+    return list(map(lambda t: dict(t[0] + t[1]), prod))
 
 
 def launch_on_all_cores(cmd, configs):
@@ -65,11 +62,15 @@ def launch_on_all_cores(cmd, configs):
             print(future.result())
 
 
+def print_configs(configs):
+    print("Running the following configs:")
+    for i, config in enumerate(configs):
+        print(i, config)
+
+
 def main(args):
-    configs_dict = yaml.load(open(args.path), Loader=yaml.SafeLoader)
-    configs = expand_configs_dict(configs_dict)
-    for i, c in enumerate(configs):
-        print(i, c)
+    configs = get_list_of_configs_from_yaml(args.path)
+    print_configs(configs)
     if args.compile:
         launch_on_all_cores(COMPILE_CMD, configs)
     if args.runsim:

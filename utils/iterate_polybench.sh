@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SRCDIR=${SRCDIR:-"./polybench-c-4.2.1-beta"}
+SRCDIR=${SRCDIR:-"./benchmarks/polybench-c-4.2.1-beta"}
 # LIST_FILE=${LIST_FILE:-"polybench_list.txt"}
 
 # if [ -e ${LIST_FILE} ]; then

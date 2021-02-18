@@ -4,11 +4,11 @@ benchmark:
       POLYBENCH_DATASET: "SMALL_DATASET"
 sim_params:
   - gem5:
-      DOCKER_IMAGE: riken/gem5
-      CPU_TYPE: HPI
-      SIMULATOR: gem5
-      CACHELINE: 128
+      DOCKER_IMAGE: "riken/gem5"
+      CPU_TYPE: "HPI"
+      SIMULATOR: "gem5"
+      CACHELINE: "128"
       CC: "aarch64-linux-gnu-gcc -static -O3"
       CXX: "aarch64-linux-gnu-g++ -static -O3"
   - riken_simulator:
-      CACHELINE: 128
+      CACHELINE: "128"

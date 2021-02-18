@@ -108,7 +108,7 @@ def get_args():
         help="Flag to disable the compilation",
     )
     parser.add_argument(
-        "--runsim",
+        "--no-runsim",
         default=True,
         action="store_false",
         help="Flag to disable the simulation",

@@ -88,14 +88,14 @@ def get_args():
         "--compile",
         type=bool,
         default=True,
-        action=argparse.BooleanOptionalAction,
+        # action=argparse.BooleanOptionalAction, # only python 3.9
         help="Flag to enable/disable the compilation",
     )
     parser.add_argument(
         "--runsim",
         type=bool,
         default=True,
-        action=argparse.BooleanOptionalAction,
+        # action=argparse.BooleanOptionalAction, # only python 3.9
         help="Flag to enable/disable the simulation",
     )
     return parser.parse_args()

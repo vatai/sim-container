@@ -7,6 +7,7 @@ sim_params:
       DOCKER_IMAGE: riken/gem5
       GEM5_CONFIG: configs/example/arm/se.py
       CPU_TYPE: HPI
+      SIMULATOR: gem5
       CC: "aarch64-linux-gnu-gcc -static -O3"
       CXX: "aarch64-linux-gnu-g++ -static -O3"
   - riken_simulator:

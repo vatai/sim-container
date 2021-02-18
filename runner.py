@@ -31,7 +31,7 @@ def make_list(k, v):
 def to_keyvalue_pairs(dict_with_list_values, key, benchmark):
     list_of_lists = [make_list(k, v) for k, v in dict_with_list_values.items()]
     if key:
-        list_of_lists.append([(key, benchmark)])
+        list_of_lists.append([(key, f"benchmarks/{benchmark}")])
     return list(itertools.product(*list_of_lists))
 
 

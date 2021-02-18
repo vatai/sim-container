@@ -11,4 +11,4 @@ sim_params:
       CC: "aarch64-linux-gnu-gcc -static -O3"
       CXX: "aarch64-linux-gnu-g++ -static -O3"
   - riken_simulator:
-      dummy: dummy
+      CACHELINE: 128

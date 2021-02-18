@@ -6,5 +6,7 @@ sim_params:
   - gem5:
       DOCKER_IMAGE: riken/gem5
       GEM5_CONFIG: configs/example/arm/se.py
+      CC: aarch64-linux-gnu-gcc-8 -static -O3
+      CXX: aarch64-linux-gnu-g++-8 -static -O3
   - riken_simulator:
       dummy: dummy

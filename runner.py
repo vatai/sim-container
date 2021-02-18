@@ -103,14 +103,12 @@ def get_args():
     # python 3.8 version
     parser.add_argument(
         "--no-compile",
-        type=bool,
         default=True,
         action="store_false",
         help="Flag to disable the compilation",
     )
     parser.add_argument(
         "--runsim",
-        type=bool,
         default=True,
         action="store_false",
         help="Flag to disable the simulation",

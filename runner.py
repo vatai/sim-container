@@ -84,19 +84,36 @@ def get_args():
         type=str,
         help="Path to the yaml file",
     )
+    # python 3.9 version:
+    # parser.add_argument(
+    #     "--compile",
+    #     type=bool,
+    #     default=True,
+    #     action=argparse.BooleanOptionalAction,
+    #     help="Flag to enable/disable the compilation",
+    # )
+    # parser.add_argument(
+    #     "--runsim",
+    #     type=bool,
+    #     default=True,
+    #     action=argparse.BooleanOptionalAction,
+    #     help="Flag to enable/disable the simulation",
+    # )
+
+    # python 3.8 version
     parser.add_argument(
-        "--compile",
+        "--no-compile",
         type=bool,
         default=True,
-        # action=argparse.BooleanOptionalAction, # only python 3.9
-        help="Flag to enable/disable the compilation",
+        action="store_false",
+        help="Flag to disable the compilation",
     )
     parser.add_argument(
         "--runsim",
         type=bool,
         default=True,
-        # action=argparse.BooleanOptionalAction, # only python 3.9
-        help="Flag to enable/disable the simulation",
+        action="store_false",
+        help="Flag to disable the simulation",
     )
     return parser.parse_args()
 

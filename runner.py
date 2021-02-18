@@ -104,12 +104,14 @@ def get_args():
     parser.add_argument(
         "--no-compile",
         default=True,
+        dest="compile",
         action="store_false",
         help="Flag to disable the compilation",
     )
     parser.add_argument(
         "--no-runsim",
         default=True,
+        dest="runsim",
         action="store_false",
         help="Flag to disable the simulation",
     )

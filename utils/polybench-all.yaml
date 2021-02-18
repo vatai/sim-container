@@ -1,6 +1,6 @@
 benchmark:
   - polybench.source:
-      POLYBENCH_NAME: "utils/generated_all_of_polybench.txt"
+      POLYBENCH_BENCHMARK: "utils/generated_all_of_polybench.txt"
       POLYBENCH_DATASET: "SMALL_DATASET"
 sim_params:
   - gem5:

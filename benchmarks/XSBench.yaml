@@ -1,9 +1,9 @@
 benchmark:
   - XSBench.source:
-        XSBENCH_OMPNT: 12
-        XSBENCH_DATASET: small
-        XSBENCH_LOOKUP: 150
-        XSBENCH_ALGO: unionized
+        XSBENCH_OMPNT: "12"
+        XSBENCH_DATASET: "small"
+        XSBENCH_LOOKUP: "150"
+        XSBENCH_ALGO: "unionized"
 sim_params:
   - gem5:
       DOCKER_IMAGE: "riken/gem5"

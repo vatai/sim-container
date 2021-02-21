@@ -11,7 +11,7 @@ docker run --rm \
        --env BIN=${BIN} \
        -v ${HOST_BINDIR}:${BINDIR} \
        -v ${HOST_OUTDIR}:${OUTDIR} \
-        ${DOCKER_IMAGE} \
+       ${DOCKER_IMAGE} \
        ${SIMDIR}/build/ARM/gem5.opt \
        ${SIMDIR}/${GEM5_CONFIG} \
        ${SIM_PARAMS} \

@@ -1,0 +1,17 @@
+benchmark:
+  - XSBench.source:
+        XSBENCH_OMPNT: 12
+        XSBENCH_DATASET: small
+        XSBENCH_LOOKUP: 150
+        XSBENCH_ALGO: unionized
+sim_params:
+  - gem5:
+      DOCKER_IMAGE: "riken/gem5"
+      CPU_TYPE: "HPI"
+      SIMULATOR: "gem5"
+      CACHELINE: "128"
+      CC: "aarch64-linux-gnu-gcc -static -O3"
+      CXX: "aarch64-linux-gnu-g++ -static -O3"
+  - riken_simulator:
+      # JUST TO MAKE IT WORK
+      CACHELINE: "256"

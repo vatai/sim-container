@@ -1,29 +1,23 @@
-## Riken simulator with `docker`
-Most of the scripts are self documented and simple enough.
+## Riken simulator experiments
+Most of the scripts are self documented and simple enough.  There is a
+`runner.py` python script, useful to launch multiple jobs based on
+yaml config files.
 
-### Building the docker image
-`01-docker-build-image.sh` builds a docker image (which can be
-verified with the `docker images` command).  Unless this image is
-deleted (using the `docker rmi riken/simulator:latest`), this script
-does not need to be invoked afterwards.
+## Overview
+- `01-docker-build-image.sh` builds two docker images
+- with `02-compile-benchmark.sh` you can compile a benchmark and
+- with `03-run-benchmark.sh` you can run a benchmark.
 
-### Getting polybench
-For convenience the `00-get-polybench.sh` can be used to download
-polybench.
+The scripts use environment variables as parameters.  Most of the
+environment variables are in the [env.source](env.source) file, which
+in turn sources a benchmark specific file.
 
-### Compiling a benchmark
-The `02-compile-benchmark.sh` builds a benchmark. See
-`jacobi1d.source` about modifying compilation parameters.  See
-`env.source` how to switch between benchmarks using `BENCH`
-environment variable.
-
-### Running a benchmark
-The `03-run-benchmark` runs the simulator.  See `sim.source` (and of
-course the simulator itself) for details on how to specify different
-simulator parameters.
-
-CAUTION: Don't forget to set `BENCH` if you want to use a different
-benchmark.
+## The runner scripts
+Instead of `02-compile-benchmark.sh` and `03-run-benchmark.sh` the `runner.py` script can be use:
+```
+python -m runner <path to yaml file>`
+```
+see examples in [benchmarks](benchmarks) directory.
 
 ## Known bugs
 If you get some permission error mentioning `mkdir` then loosen your
@@ -34,8 +28,8 @@ complains about).
 Check out what are the variables in `env.source`.
 ```
 docker run --rm -it \
-       -v ${HOST_SRCDIR}:${SRCDIR} \
-       -v ${HOST_BINDIR}:${BINDIR} \
+       -v ${HOST_SRCDIR}:/tmp/src \
+       -v ${HOST_BINDIR}:/tmp/bin \
        riken/simulator \
        /bin/bash
 ```

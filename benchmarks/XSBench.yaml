@@ -2,7 +2,8 @@ benchmark:
   - XSBench.source:
         XSBENCH_OMPNT: "12"
         XSBENCH_DATASET: "small"
-        XSBENCH_LOOKUP: "150"
+        XSBENCH_GRIDPTS: "10"
+        XSBENCH_LOOKUP: "10"
         XSBENCH_ALGO: "unionized"
 sim_params:
   - gem5:

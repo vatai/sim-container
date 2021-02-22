@@ -4,13 +4,20 @@
 # Outputs: BIN, HOST_SRCDIR, COMPILE_CMD, BIN_OPTIONS, RUN_OPTIONS
 
 # Benchmark specific
+#  -t <threads>     Number of OpenMP threads to run
+#  -s <size>        Size of H-M Benchmark to run (small, large, XL, XXL)
+#  -g <gridpoints>  Number of gridpoints per nuclide (overrides -s defaults)
+#  -G <grid type>   Grid search type (unionized, nuclide). Defaults to unionized.
+#  -l <lookups>     Number of Cross-section (XS) lookups
+
 XSBENCH_OMPNT=${XSBENCH_OMPNT:-12}
 XSBENCH_DATASET=${XSBENCH_DATASET:-small}
+XSBENCH_GRIDPTS=${XSBENCH_GRIDPTS:-10}
 XSBENCH_LOOKUP=${XSBENCH_LOOKUP:-150}
 XSBENCH_ALGO=${XSBENCH_ALGO:-unionized}
 
-RUN_OPTIONS="-t ${XSBENCH_OMPNT} -s ${XSBENCH_DATASET} -l ${XSBENCH_LOOKUP} -G ${XSBENCH_ALGO}"
-BIN_OPTIONS="/t${XSBENCH_OMPNT}.s${XSBENCH_DATASET}.l${XSBENCH_LOOKUP}.G${XSBENCH_ALGO}"
+RUN_OPTIONS="-t ${XSBENCH_OMPNT} -s ${XSBENCH_DATASET} -g ${XSBENCH_GRIDPTS} -l ${XSBENCH_LOOKUP} -G ${XSBENCH_ALGO}"
+BIN_OPTIONS="/t${XSBENCH_OMPNT}.s${XSBENCH_DATASET}.g${XSBENCH_GRIDPTS}.l${XSBENCH_LOOKUP}.G${XSBENCH_ALGO}"
 
 BIN="XSBench"
 HOST_SRCDIR=${HOST_SRCDIR:-"$(pwd)/benchmarks"}

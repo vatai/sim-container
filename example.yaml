@@ -13,10 +13,10 @@ benchmark:
       XSBENCH_LOOKUP: "1500"
 sim_params:
   - config1:
-      CACHE_SIZE:
+      L2_SIZE:
         - "8MB"
         - "16MB"
       CACHELINE: "256"
   - config2:
-      CACHE_SIZE: "1MB"
+      L2_SIZE: "1MB"
       CACHELINE: "128"

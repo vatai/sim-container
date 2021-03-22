@@ -1,7 +1,7 @@
 benchmark:
   - precompiled.source:
       BIN: XSBench-peachy
-      RUN_OPTIONS: "-s small -g 10 -l 10"
+      RUN_OPTIONS: "-t ${NCORES} -s small -g 10 -l 10"
 sim_params:
   # - gem5:
   #     DOCKER_IMAGE: "riken/gem5"
@@ -13,3 +13,4 @@ sim_params:
   - riken_simulator:
       # JUST TO MAKE IT WORK
       CACHELINE: "256"
+      NCORES: 8

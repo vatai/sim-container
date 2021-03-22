@@ -1,0 +1,14 @@
+
+#!/bin/bash
+
+# Inputs: CC, CXX, SRCDIR, HOST_SRCDIR
+# Outputs: BIN, HOST_SRCDIR, COMPILE_CMD, BIN_OPTIONS, RUN_OPTIONS
+
+# Specify options using $RUN_OPTIONS variable, example:
+# RUN_OPTIONS="-t 12 -s 34"
+
+BIN_OPTIONS=$(echo ${RUN_OPTIONS} | sed 's/ /./g')
+
+BIN=${BIN:-"hello.exe"}
+### HOST_SRCDIR=${HOST_SRCDIR:-"$(pwd)/benchmarks"}
+COMPILE_CMD="echo No need to compile!"

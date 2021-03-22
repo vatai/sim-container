@@ -13,4 +13,4 @@ sim_params:
   - riken_simulator:
       # JUST TO MAKE IT WORK
       CACHELINE: "256"
-      NCORES: 8
+      NCORES: "8"

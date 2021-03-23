@@ -39,6 +39,11 @@ WORKDIR /opt
 RUN git clone https://github.com/RIKEN-RCCS/riken_simulator.git
 WORKDIR riken_simulator
 RUN sed -i "369,372s:^:#:" SConstruct
+
+# Comment out SnoopMask check
+RUN sed -i '117,119 {s!^!// !}' src/mem/snoop_filter.hh
+
+# Build gem5
 RUN scons build/ARM/gem5.opt -j $(nproc)
 
 RUN sed -i -e 's/\(--cpu-type=O3_ARM_PostK_3\)/& --caches --l1d_size=128kB --l1i_size=128kB --l2cache --l2_size=64MB --mem_bus_width=128 --mem_resp_width=256/' util/run-pa

@@ -50,4 +50,4 @@ RUN sed -i -e 's/\(--cpu-type=O3_ARM_PostK_3\)/& --caches --l1d_size=128kB --l1i
 
 USER ${USER}:${GROUP}
 WORKDIR ${HOME}
-echo "export PATH=/opt/riken_simulator/util:/opt/riken_simulator/bin"
+RUN echo "export PATH=/opt/riken_simulator/util:/opt/riken_simulator/bin" >> ${HOME}/.bashrc

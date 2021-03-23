@@ -1,12 +1,14 @@
 benchmark:
   - precompiled.source:
       BIN: XSBench-peachy
-      RUN_OPTIONS: "-t 83 -s small -g 10 -l 10"
+      RUN_OPTIONS: "-t 84 -s small -l 15000000 -G unionized"
 sim_params:
   - config01:
       NCORES: "84"
       L1D_SIZE: "128kB"
       L1I_SIZE: "128kB"
-      L2_SIZE: "42MB"
+      L2_SIZE:
+        - "32MB"
+        - "64MB"
       BUS_WIDTH: "128"
       RESP_WIDTH: "256"

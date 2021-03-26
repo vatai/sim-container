@@ -38,7 +38,7 @@ RUN chmod o-w /etc/sudoers
 USER ${USER}:${GROUP}
 WORKDIR ${HOME}
 RUN git clone --depth 1 https://github.com/RIKEN-RCCS/riken_simulator.git
-RUN sed -i -e 's!PREFIX=/opt/riken_simulator!PREFIX=/home/user/riken_simulator!' riken_simulator/util/gem5-o3
+RUN sed -i -e "s!PREFIX=/opt/riken_simulator!PREFIX=${HOME}/riken_simulator!" riken_simulator/util/gem5-o3
 
 WORKDIR ${HOME}/riken_simulator
 RUN sed -i "369,372s:^:#:" SConstruct

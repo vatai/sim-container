@@ -10,13 +10,13 @@ docker build \
     --build-arg GROUP_ID=$(id -g) \
     -t riken/simulator .
 
-docker build \
-    --build-arg USER=$(id -un) \
-    --build-arg USER_ID=$(id -u) \
-    --build-arg GROUP=$(id -gn) \
-    --build-arg GROUP_ID=$(id -g) \
-    -f config01-l2-32MB.dockerfile \
-    -t riken/c01-32 .
+# docker build \
+#     --build-arg USER=$(id -un) \
+#     --build-arg USER_ID=$(id -u) \
+#     --build-arg GROUP=$(id -gn) \
+#     --build-arg GROUP_ID=$(id -g) \
+#     -f config01-l2-32MB.dockerfile \
+#     -t riken/c01-32 .
 
 # docker build \
 #     --build-arg USER=$(id -un) \

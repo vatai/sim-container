@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM riken/simulator
 MAINTAINER vatai
 
 ARG USER
@@ -9,45 +9,23 @@ ARG GROUP_ID
 ENV HOME /home/${USER}
 ENV SHELL /bin/bash
 
-RUN groupadd -g ${GROUP_ID} ${GROUP}
-RUN useradd -l -m -u ${USER_ID} -g ${GROUP} ${USER}
-RUN gpasswd -a ${USER} sudo
-RUN echo "${USER}:userpass" | chpasswd
+# RUN groupadd -g ${GROUP_ID} ${GROUP}
+# RUN useradd -l -m -u ${USER_ID} -g ${GROUP} ${USER}
+# RUN gpasswd -a ${USER} sudo
+# RUN echo "${USER}:userpass" | chpasswd
 
-RUN apt-get update && apt-get install -y \
-    g++ \
-    g++-8-aarch64-linux-gnu \
-    libgoogle-perftools-dev \
-    protobuf-compiler \
-    libprotobuf-dev \
-    git \
-    m4 \
-    python-dev \
-    make \
-    scons \
-    sudo \
-    vim \
-    zlib1g-dev
+WORKDIR ${HOME}/riken_simulator
 
-RUN apt-get clean
-
-RUN chmod o+w /etc/sudoers
-RUN sed -i -e 's/%sudo\tALL=(ALL:ALL) ALL/%sudo\tALL=(ALL) NOPASSWD: ALL/'  /etc/sudoers
-RUN chmod o-w /etc/sudoers
-
-WORKDIR /opt
-RUN git clone https://github.com/RIKEN-RCCS/riken_simulator.git
-WORKDIR riken_simulator
-RUN sed -i "369,372s:^:#:" SConstruct
-
-# Comment out SnoopMask check
+# Fix SnoopMask
+RUN sed -i '69,71 {s!^!// !}' src/mem/cache/tags/base_set_assoc.cc
 RUN sed -i '117,119 {s!^!// !}' src/mem/snoop_filter.hh
+RUN sed -i 's/typedef uint64_t SnoopMask;/typedef unsigned long long SnoopMask;/' src/mem/snoop_filter.hh
 
 # Build gem5
 RUN scons build/ARM/gem5.opt -j $(nproc)
 
-RUN sed -i -e 's/\(--cpu-type=O3_ARM_PostK_3\)/& --caches --l1d_size=128kB --l1i_size=128kB --l2cache --l2_size=32MB --mem_bus_width=128 --mem_resp_width=256/' util/run-pa
+# RUN sudo sed -i -e 's/\(--cpu-type=O3_ARM_PostK_3\)/& --caches --l1d_size=128kB --l1i_size=128kB --l2cache --l2_size=32MB --mem_bus_width=128 --mem_resp_width=256/' util/run-pa
 
 USER ${USER}:${GROUP}
 WORKDIR ${HOME}
-RUN echo "export PATH=/opt/riken_simulator/util:/opt/riken_simulator/bin" >> ${HOME}/.bashrc
+RUN echo "export PATH=${HOME}/riken_simulator/util:${PATH}" >> ${HOME}/.bashrc

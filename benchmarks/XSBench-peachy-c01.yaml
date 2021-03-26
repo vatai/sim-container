@@ -1,14 +1,26 @@
 benchmark:
   - precompiled.source:
       BIN: XSBench-peachy
-      RUN_OPTIONS: "-t 84 -s small -l 15000000 -G unionized"
+      # RUN_OPTIONS: "-t 84 -s small -l 15000000 -G unionized"
+      RUN_OPTIONS: "-t 18 -s small -g 10 -l 10 -G unionized"
 sim_params:
   - config01:
-      NCORES: "84"
-      L1D_SIZE: "128kB"
-      L1I_SIZE: "128kB"
-      L2_SIZE:
-        - "32MB"
-        - "64MB"
-      BUS_WIDTH: "128"
-      RESP_WIDTH: "256"
+      DOCKER_IMAGE: "riken/sumulator"
+      NCORES: "16"
+      # L1D_SIZE: "128kB"
+      # L1I_SIZE: "128kB"
+      L2_SIZE: "128MB"
+      L2_BUS_WIDTH: "1024"
+      L2_RESP_WIDTH: "1024"
+      MEM_BUS_WIDTH: "16"
+      MEM_RESP_WIDTH: "32"
+  - config02:
+      DOCKER_IMAGE: "riken/sumulator"
+      NCORES: "16"
+      # L1D_SIZE: "128kB"
+      # L1I_SIZE: "128kB"
+      L2_SIZE: "128MB"
+      L2_BUS_WIDTH: "1024"
+      L2_RESP_WIDTH: "1024"
+      MEM_BUS_WIDTH: "128"
+      MEM_RESP_WIDTH: "256"

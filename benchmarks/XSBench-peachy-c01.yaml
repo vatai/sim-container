@@ -1,8 +1,8 @@
 benchmark:
   - precompiled.source:
       BIN: XSBench-peachy
-      # RUN_OPTIONS: "-t 84 -s small -l 15000000 -G unionized"
-      RUN_OPTIONS: "-t 18 -s small -g 10 -l 10 -G unionized"
+      # RUN_OPTIONS: "-t 16 -s small -l 15000000 -G unionized"
+      RUN_OPTIONS: "-t 16 -s small -g 10 -l 10 -G unionized"
 sim_params:
   - config01:
       DOCKER_IMAGE: "riken/simulator"

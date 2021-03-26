@@ -5,7 +5,7 @@ benchmark:
       RUN_OPTIONS: "-t 18 -s small -g 10 -l 10 -G unionized"
 sim_params:
   - config01:
-      DOCKER_IMAGE: "riken/sumulator"
+      DOCKER_IMAGE: "riken/simulator"
       NCORES: "16"
       # L1D_SIZE: "128kB"
       # L1I_SIZE: "128kB"
@@ -15,7 +15,7 @@ sim_params:
       MEM_BUS_WIDTH: "16"
       MEM_RESP_WIDTH: "32"
   - config02:
-      DOCKER_IMAGE: "riken/sumulator"
+      DOCKER_IMAGE: "riken/simulator"
       NCORES: "16"
       # L1D_SIZE: "128kB"
       # L1I_SIZE: "128kB"

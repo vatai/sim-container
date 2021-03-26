@@ -23,5 +23,5 @@ docker run --rm \
        ${SIMDIR}/${GEM5_CONFIG} \
        ${SIM_PARAMS} \
        -c ${BINDIR}/${BIN} -o "${RUN_OPTIONS}" \
-       1>> ${HOST_OUTDIR}/output-and-error.txt \
+       1> ${HOST_OUTDIR}/output-and-error.txt \
        2>&1

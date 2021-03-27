@@ -1,5 +1,4 @@
 FROM ubuntu:18.04
-MAINTAINER vatai
 
 ARG USER
 ARG GROUP

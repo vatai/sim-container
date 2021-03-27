@@ -1,5 +1,4 @@
 FROM riken/simulator
-MAINTAINER vatai
 
 ARG USER
 ARG GROUP

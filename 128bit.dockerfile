@@ -8,16 +8,9 @@ ARG GROUP_ID
 ENV HOME /home/${USER}
 ENV SHELL /bin/bash
 
-# RUN groupadd -g ${GROUP_ID} ${GROUP}
-# RUN useradd -l -m -u ${USER_ID} -g ${GROUP} ${USER}
-# RUN gpasswd -a ${USER} sudo
-# RUN echo "${USER}:userpass" | chpasswd
-
 WORKDIR ${HOME}/riken_simulator
 
 # Fix SnoopMask
-# RUN sed -i '69,71 {s!^!// !}' src/mem/cache/tags/base_set_assoc.cc
-# RUN sed -i '117,119 {s!^!// !}' src/mem/snoop_filter.hh
 RUN sed -i 's/typedef uint64_t SnoopMask;/typedef unsigned __int128 SnoopMask;/' src/mem/snoop_filter.hh
 RUN sed -i '38 i std::ostream& operator<<(std::ostream& d, const unsigned __int128 v);' src/base/cprintf_formats.hh
 RUN sed -i '41 i ostream& operator<<(ostream& d, const unsigned __int128 v) { d << "128int Hi:" << (void*)v << ";Lo:" << (void*)(v >> 64); return d;}' src/base/cprintf.cc

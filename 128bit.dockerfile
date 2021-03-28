@@ -27,4 +27,3 @@ RUN scons build/ARM/gem5.opt -j $(nproc)
 
 USER ${USER}:${GROUP}
 WORKDIR ${HOME}
-RUN echo "export PATH=${HOME}/riken_simulator/util:${PATH}" >> ${HOME}/.bashrc

@@ -16,9 +16,11 @@ ENV SHELL /bin/bash
 WORKDIR ${HOME}/riken_simulator
 
 # Fix SnoopMask
-RUN sed -i '69,71 {s!^!// !}' src/mem/cache/tags/base_set_assoc.cc
-RUN sed -i '117,119 {s!^!// !}' src/mem/snoop_filter.hh
-RUN sed -i 's/typedef uint64_t SnoopMask;/typedef unsigned long long SnoopMask;/' src/mem/snoop_filter.hh
+# RUN sed -i '69,71 {s!^!// !}' src/mem/cache/tags/base_set_assoc.cc
+# RUN sed -i '117,119 {s!^!// !}' src/mem/snoop_filter.hh
+RUN sed -i 's/typedef uint64_t SnoopMask;/typedef unsigned __int128 SnoopMask;/' src/mem/snoop_filter.hh
+RUN sed -i '38 i std::ostream& operator<<(std::ostream& d, const unsigned __int128 v);' src/base/cprintf_formats.hh
+RUN sed -i '41 i ostream& operator<<(ostream& d, const unsigned __int128 v) { return d;}' src/base/cprintf.cc
 
 # Build gem5
 RUN scons build/ARM/gem5.opt -j $(nproc)

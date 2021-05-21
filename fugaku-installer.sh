@@ -18,5 +18,6 @@ cd riken_simulator
 sed -i "369,372s:^:#:" ./SConstruct
 sed -i -e 's/ exit(/ sys.exit(/g' ./util/cpt_upgrader.py
 sed -i -e 's/if NO_FALLOCATE.*/if NO_FALLOCATE==0/' ./src/sim/syscall_emul.cc
+sed -i -e 's/const Addr PageShift = 16;/const Addr PageShift = 25;/' ./src/arch/arm/isa_traits.hh
 python2 $(which scons) build/ARM/gem5.opt -j $(nproc)
 

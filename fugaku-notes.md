@@ -1,6 +1,6 @@
 1. Compile `riken_simulator` with the
    [`fugaku-installer.sh`](./fugaku-installer.sh) script (@Jens it has
-   one new `sed` called `Bali's fix`).
+   one new `sed` called [`Bali's fix`](./fugaku-installer.sh#L26)).
 2. Obtain `ld-linux-aarch64.so.1` and the files in
    [`fugaku-libs.txt`](fugaku-libs.txt) (save them to `../lib`).
 3. Compile the `hello-world` apps (using the

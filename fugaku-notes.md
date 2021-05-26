@@ -1,3 +1,5 @@
+# Run both `gcc` and `fcc` dynamic binaries anywhere with `riken_simulator`
+
 1. Compile `riken_simulator` with the
    [`fugaku-installer.sh`](./fugaku-installer.sh) script (@Jens it has
    one new `sed` called [`Bali's fix`](./fugaku-installer.sh#L26)).

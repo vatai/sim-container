@@ -1,6 +1,7 @@
 #!/bin/env python
 from pathlib import Path
 
+import matplotlib.pyplot as plt
 import pandas as pd
 
 
@@ -17,13 +18,29 @@ def get_stats_dict(m5dir):
     return dict(result)
 
 
-def get_data(path="~/bali-sim-m5"):
+def get_stats_dict(path):
     path = Path(path).expanduser()
-    key = "host_seconds"
+    entries = {}
     for m5dir in path.glob("*.fccpx"):
         name = m5dir.name
         stats = get_stats_dict(m5dir)
-        print(name, stats[key])
+        entries[name] = stats
+    df = pd.DataFrame(entries).transpose()
+    df["source"] = path
+    return df
 
 
-get_data()
+def main():
+    bali_df = get_stats_dict("~/bali-sim-m5")
+    rsim_df = get_stats_dict("~/riken-sim-m5")
+    big_df = pd.concat([bali_df, rsim_df])
+    key = "host_seconds"
+    big_df[key] = pd.to_numeric(big_df[key])
+    df = big_df.pivot(columns=["source"], values="host_seconds")
+
+    print(df.head())
+    df.plot.bar()
+    plt.show()
+
+
+main()

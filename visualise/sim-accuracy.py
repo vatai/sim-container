@@ -26,7 +26,7 @@ def get_stats_df(path):
         stats = get_stats_dict(m5dir)
         entries[name] = stats
     df = pd.DataFrame(entries).transpose()
-    df["source"] = path
+    df["source"] = path.name
     return df
 
 
@@ -41,6 +41,7 @@ def host_seconds_barplot():
     print(df.head())
     df.plot.bar()
     plt.show()
+    plt.close()
 
 
 def get_kernel_time(filename):
@@ -62,32 +63,55 @@ def get_kernel_times_df(path):
     return pd.Series(result, name=path.name)
 
 
-def main():
+def accuracy_plot():
     a64fx = get_kernel_times_df("~/a64fx-outs")
     bali = get_kernel_times_df("~/bali-sim-m5")
     rsim = get_kernel_times_df("~/riken-sim-m5")
-
-    sims = bali - rsim
-    print(f"min: {sims.min()}, max: {sims.max()}")
-
-    df = pd.DataFrame([bali, a64fx]).transpose()
-    fig = plt.Figure()
-    bar_plot = df.plot.bar()
-    # plt.show()
-    fig.savefig("bars", bbox_inches="tight")
-    plt.close(fig)
+    abs_times = pd.DataFrame([bali, a64fx]).transpose().sort_index()
 
     fast_a = a64fx >= bali
     slow_a = a64fx < bali
     positive = a64fx[fast_a] / bali[fast_a] - 1
     negative = bali[slow_a] / a64fx[slow_a] - 1
-    combined = pd.concat([positive, -negative]).sort_index()
+    rel_times = pd.concat([positive, -negative]).sort_index()
 
-    fig = plt.Figure()
-    speedup_plot = combined.plot.bar()
+    sims = bali - rsim
+    print(f"min: {sims.min()}, max: {sims.max()}")
+
+    # bar_plot = df.plot.bar()
+    # fig = bar_plot.get_figure()
+    # fig.savefig("bars", bbox_inches="tight")
+    # plt.clf()
+
+    # speedup_plot = rel_times.plot.bar()
+    # fig = speedup_plot.get_figure()
+    # fig.savefig("speedup", bbox_inches="tight")
+    # plt.clf()
+
+    rel_color = "green"
+    dot_color = "lightgreen"
+    fig, ax0 = plt.subplots()
+    ax1 = ax0.twinx()
+
+    ax0.set(
+        title="Absolute and relative comparison of sim and chip \n"
+        "of polybench benchmarks, only kernels, medium dataset, fccpx"
+    )
+    ax0.set_ylabel("Absolute speed (in seconds)")
+    ax0.set_ylim(-0.05, 0.5)
+    ax1.set_ylabel("Relative speed (+1: 2x speedup, -1: 2x slowdown)", color=rel_color)
+    ax1.set_ylim(-0.22, 2.20)
+    ax1.tick_params(axis="y", labelcolor=rel_color)
+
+    abs_times.plot.bar(ax=ax0)
+    rel_times.plot.line(marker="D", color=dot_color, linestyle="None", ax=ax1)
+    ax1.axhline(linestyle="dashed", linewidth=1, color=rel_color)
+
+    fig.tight_layout()
     # plt.show()
-    fig.savefig("speedup", bbox_inches="tight")
-    plt.close(fig)
+    plt.savefig("combined")
+    plt.close()
 
 
-main()
+host_seconds_barplot()
+accuracy_plot()

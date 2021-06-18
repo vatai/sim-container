@@ -3,6 +3,7 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 import pandas as pd
+from scipy import stats
 
 
 def get_stats_dict(m5dir):
@@ -21,7 +22,14 @@ def get_stats_dict(m5dir):
 def get_stats_df(path, m5dir_glob="*.fccpx"):
     entries = {}
     for m5dir in path.glob(m5dir_glob):
-        name = m5dir.name
+        name = m5dir.name.replace("omp-stream10_-s_262144_numthreads", "")
+        try:
+            name = int(name)
+            name = f"{name:03}"
+        except Exception:
+            pass
+        if not m5dir.is_dir():
+            continue
         stats = get_stats_dict(m5dir)
         entries[name] = stats
     df = pd.DataFrame(entries).transpose()
@@ -43,7 +51,7 @@ def get_kernel_times_df(path, stdout_glob="*.fccpx.stdout.txt"):
     for filename in files:
         key = ".".join(filename.name.split(".")[:3])
         result[key] = get_kernel_time(filename)
-    wtime = pd.Series(result, name="kernel_wtime")
+    wtime = pd.Series(result, name="kernel_wtime", dtype=float)
     df = pd.DataFrame(wtime)
     return df.sort_index()
 
@@ -92,12 +100,12 @@ def speedup_plot(title, savefig, rel_times, abs_times):
     abs_times.plot.bar(ax=ax0)
     rel_times.plot.line(marker="D", color=dot_color, linestyle="None", ax=ax1)
     ax1.axhline(linestyle="dashed", linewidth=1, color=rel_color)
-    mean = rel_times.abs().mean()
-    ax1.axhline(mean, linestyle="dotted", color=rel_color)
+    gmean = stats.gmean(rel_times.abs())
+    ax1.axhline(gmean, linestyle="dotted", color=rel_color)
     ax1.text(
         1.0,
-        mean,
-        f"mean: {mean:0.06}",
+        gmean,
+        f"gemea: {gmean:0.06}",
         va="center",
         color=rel_color,
         backgroundcolor="w",
@@ -109,8 +117,9 @@ def speedup_plot(title, savefig, rel_times, abs_times):
     plt.close()
 
 
-def get_host_seconds_wtime_df(m5dir):
+def get_polybench_host_seconds_wtime_df(m5dir):
     m5dir = Path(m5dir).expanduser()
+    assert m5dir.exists()
     df1 = get_stats_df(m5dir)
     df2 = get_kernel_times_df(m5dir)
     df = pd.concat([df1, df2], axis=1)
@@ -118,13 +127,26 @@ def get_host_seconds_wtime_df(m5dir):
     return df
 
 
+def get_ompstream_host_sim_seconds_df(m5dir):
+    m5dir = Path(m5dir).expanduser()
+    assert m5dir.exists()
+    df1 = get_stats_df(m5dir, "*")
+    df2 = get_kernel_times_df(m5dir)
+    df = pd.concat([df1, df2], axis=1)
+    df["source"] = m5dir.name
+    return df
+
+
 def main():
-    dirs = [
-        "~/bali-sim-m5",
-        "~/riken-sim-m5",
-        "~/a64fx-outs",
+    root = "."
+    poly_dirs = [
+        f"{root}/bali-sim-m5",
+        f"{root}/riken-sim-m5",
+        f"{root}/a64fx-outs",
     ]
-    df = pd.concat(map(get_host_seconds_wtime_df, dirs))
+    poly_dfs = list(map(get_polybench_host_seconds_wtime_df, poly_dirs))
+    ompstream_dfs = [get_ompstream_host_sim_seconds_df(f"{root}/omp-stream")]
+    df = pd.concat(ompstream_dfs + poly_dfs)
 
     title = "Simulation accuracy: chip vs sim kernel wtime"
     times = get_rel_abs_times(df, "bali-sim-m5", "kernel_wtime", "a64fx-outs")
@@ -138,6 +160,12 @@ def main():
     times = get_rel_abs_times(df, "bali-sim-m5", "kernel_wtime", key2="sim_seconds")
     speedup_plot(title, "kernel_ratio.pdf", *times)
 
+    title = "Simulation slowdown"
+    times = get_rel_abs_times(df, "omp-stream", "sim_seconds", key2="host_seconds")
+    speedup_plot(title, "sim_slowdown_omp.pdf", *times)
 
-if __name__ == "__main__":
-    main()
+    print("DONE")
+
+
+# if __name__ == "__main__":
+main()

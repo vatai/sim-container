@@ -3,7 +3,9 @@
 list=$1
 
 cat $list | while read line; do
-    bin=$(echo $line | cut -d\  -f1)
-    core=$(echo $line | cut -d\  -f2)
-    screen -S C${core}$.(basename $bin) -d -m bash -c "../sim-container/run-dynamic.sh $bin $core"
+    core=$(echo $line | cut -d\;  -f1)
+    num_threads=$(echo $line | cut -d\; -f2)
+    bin=$(echo $line | cut -d\; -f3)
+    args="$(echo $line | cut -d\; -f4)"
+    screen -S C${core}.$(basename $bin) -d -m bash -c "../sim-container/run-dynamic.sh $core $num_threads $bin '$args'"
 done

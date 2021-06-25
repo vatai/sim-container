@@ -10,7 +10,7 @@ shift
 
 echo "xxx ${BIN} $@ xxx"
 
-if [[ "" -e $GEM5DIR ]]; then
+if [[ -z $GEM5DIR ]]; then
   echo 'Please set $GEM5DIR first'
   exit -1
 fi

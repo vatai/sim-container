@@ -2,7 +2,7 @@
 
 list=$1
 
-cat $list | while read line; do
+cat $list | sed -e '/^#/d' | while read line; do
     core=$(echo $line | cut -d\;  -f1)
     num_threads=$(echo $line | cut -d\; -f2)
     bin=$(echo $line | cut -d\; -f3)

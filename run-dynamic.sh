@@ -22,7 +22,7 @@ l2_bankbit=${l2_bankbit:-2}
 l2_bus_width=${l2_bus_width:-64}
 l2_resp_width=${l2_resp_width:-128}
 
-suffix=$(echo $@ | sed 's/ /_/g')
+suffix=$(echo "$@" | sed 's/ /_/g')
 out_path=${BM}${suffix}_numthreads${num_threads}_bankbit${l2_bankbit}_buswidth${l2_bus_width}_respwidth${l2_resp_width}
 
 fjenv=/tmp/${BM}${core}fjenv${num_threads}.txt

@@ -10,14 +10,17 @@ import pandas as pd
 def read_df(path: Path):
     pattern = r".*numthreads(\d+)_bankbit(\d+)_buswidth(\d+)_respwidth(\d+).*"
     match = re.match(pattern, path.name)
-    num_threads, bankbit, bus_width, resp_width = match.groups()
-    data = dict(
-        num_threads=int(num_threads),
-        bankbit=int(bankbit),
-        bus_width=int(bus_width),
-        resp_width=int(resp_width),
-    )
-    data["config"] = f"{num_threads}-{bankbit}-{bus_width}-{resp_width}"
+    if match:
+        num_threads, bankbit, bus_width, resp_width = match.groups()
+        data = dict(
+            num_threads=int(num_threads),
+            bankbit=int(bankbit),
+            bus_width=int(bus_width),
+            resp_width=int(resp_width),
+        )
+        data["config"] = f"{num_threads}-{bankbit}-{bus_width}-{resp_width}"
+    else:
+        data = dict(config="fugaku")
     with open(path) as file:
         for line in file.readlines():
             if " -s " in line:
@@ -89,6 +92,7 @@ def main():
         plot(df[key], f"{key}-bandwidth")
 
     plot(df, "all", True)
+    df.to_csv("data.csv", sep="\t")
     print("Done!")
 
 
